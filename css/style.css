@@ -21,6 +21,11 @@ body {
 	margin-top: 10px;
 }
 
+#status {
+	font-size: 27px;
+	color: gray;
+}
+
 #right {
 	width: auto;
 	float: right;

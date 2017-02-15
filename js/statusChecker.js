@@ -2,9 +2,13 @@ var link = 'https://api.hitbox.tv/';
 //ending between them
 var sname = '/madziajapko';
 
-var status;
-var title;
-var game; //wargame *joke*
+var status = 'N/A';
+var title = 'N/A';
+var game = 'N/A'; //wargame *joke*
+
+function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 function getJson(ending) {
 	if(typeof(ending) !== 'string') {
@@ -16,8 +20,16 @@ function getJson(ending) {
 function getData() {
 }
 
-function sleep(ms) {
-	return new Promise(resolve => setTimeout(resolve, ms));
+function applyChanges() {
+	$("#status").html(status);
+	if(status === 'Online')
+		$("#status").css("color", "green");
+	else if(status === 'Offline')
+		$("#status").css("color", "red");
+	else
+		$("#status").css("color", "gray");
+	$("#tytul").html(title);
+	$("#gra").html(game);
 }
 
 function checkStatus() {
