@@ -39,8 +39,10 @@ body {
 	width: 100px;
 	height: auto;
 	margin: auto;
+	cursor: pointer;
 }
 
 #everything {
 	color: red;
+	cursor: pointer;
 }
