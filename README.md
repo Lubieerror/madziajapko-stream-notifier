@@ -1,2 +1,3 @@
 # madziajapko-stream-notifier
-Tutaj będzie powiadamiacz, czy Madzia ma streama! Na razie możesz sprawdzić to: https://api.hitbox.tv/media/status/madziajapko i sobie zinterpretować.
+Wersja early alpha powiadamiacza! 
+Na razie działa tylko wyśietlanie ramki więc na razie pozostaje Ci jedynie sprawdzić to: https://api.hitbox.tv/media/status/madziajapko i sobie zinterpretować.
