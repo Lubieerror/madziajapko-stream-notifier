@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>MadziaJapko Hitbox Alpha</title>
+
+		<!--styles:-->
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+
+		<!--scripts:-->
+		<script>if (typeof module === 'object') {window.module = module;module = undefined;}</script>
+
+		<script src="js/jquery-3.1.1.js"></script>
+		<script src="js/demo.js"></script>
+
+		<script>if (window.module) module = window.module;</script>
+	</head>
+	<body>
+		<div id="left">
+			<div id="title">Madzia Japko</div>
+			<div id="info">
+				<div>Status: <p id="status">N/A</p></div>
+				<div>Tytuł: <p id="tytuł">N/A</p></div>
+				<div>Gra: <p id="gra">N/A</p></div>
+			</div>
+		</div>
+		<div id="right">
+			<div id="statusBg">
+				<div id="picture">
+					<a onclick="require('shell').openExternal('https://hitbox.tv/madziajapko/')"> <img id="pMadzia" alt="Madzia Japko Hitbox" src="rsc/madzia.jpg"> </a>
+				</div>
+			</div>
+		</div>
+		<div>
+			<p id="everything" onclick="window.close();">Test</p>
+		</div>
+	</body>
+</html>

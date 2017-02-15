@@ -1,0 +1,46 @@
+p { 
+	display: inline;
+}
+
+body {
+	background-color: #eae1c9;
+}
+
+#left {
+	width: 60%;
+	float: left;
+}
+
+#title {
+	font-size: 30px;
+	font-family: Calibri;
+}
+
+#info {
+	font-size: 20px;
+	margin-top: 10px;
+}
+
+#right {
+	width: auto;
+	float: right;
+}
+
+#statusBg {
+	padding: 10px;
+	background-color: darkgray;
+}
+
+#picture {
+	background-color: lightyellow;
+}
+
+#pMadzia {
+	width: 100px;
+	height: auto;
+	margin: auto;
+}
+
+#everything {
+	color: red;
+}
