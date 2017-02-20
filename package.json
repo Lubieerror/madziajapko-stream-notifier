@@ -1,13 +1,13 @@
 {
-  "name": "demo",
+  "name": "madzia-japko-stream-notifier",
   "version": "1.0.0",
-  "description": "nope",
+  "description": "Powiadamia o liveach",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
   "author": "lubieerror",
-  "license": "GPL2",
+  "license": "GPL-3.0",
   "devDependencies": {
     "electron": "^1.4.15"
   },

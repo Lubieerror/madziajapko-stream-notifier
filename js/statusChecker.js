@@ -1,4 +1,4 @@
-var link = 'https://api.hitbox.tv/';
+var domena = 'https://api.hitbox.tv/';
 //ending between them
 var sname = '/madziajapko';
 
@@ -6,15 +6,33 @@ var status = 'N/A';
 var title = 'N/A';
 var game = 'N/A'; //wargame *joke*
 
-function sleep(ms) {
-	return new Promise(resolve => setTimeout(resolve, ms));
+function sleep (ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
+// Usage!
+// sleep(500).then(() => {
+//     // Do something after the sleep!
+// });
 
-function getJson(ending) {
-	if(typeof(ending) !== 'string') {
-		console.log("Error! Json - podany odnośnik nie jest stringiem! (typeof = " + typeof(ending) +")");
-		return;
-	}
+//UPDATE! IT'S BROKEN!
+// function sleep(ms) {
+// 	var currentTime = new Date().getTime();
+// 	while (currentTime + ms >= new Date().getTime()) {}
+// }
+
+function getJsonData(mid) {
+	var link = domena + mid + sname;
+	var finalJson;
+
+	$.getJSON(link, function (tempJson) {
+		// console.log("inside: " + tempJson);
+		finalJson = tempJson;
+	});
+
+	// if(finalJson)
+	// 	return true;
+	// else
+	// 	return false;
 }
 
 function getData() {
@@ -22,12 +40,18 @@ function getData() {
 
 function applyChanges() {
 	$("#status").html(status);
-	if(status === 'Online')
+	if(status === 'Online') {
 		$("#status").css("color", "green");
-	else if(status === 'Offline')
+		$("#statusBg").css("background-color", "darkgreen");
+	}
+	else if(status === 'Offline') {
 		$("#status").css("color", "red");
-	else
+		$("#statusBg").css("background-color", "red");
+	}
+	else {
 		$("#status").css("color", "gray");
+		$("#statusBg").css("background-color", "darkgray");
+	}
 	$("#tytul").html(title);
 	$("#gra").html(game);
 }
@@ -35,6 +59,18 @@ function applyChanges() {
 
 //main function!!!
 function checkStatus() {
+	var sleepDurationSec = 1;
+	var firstData;
+	
+	do {
+		sleep(1000 * sleepDurationSec).then(() => {
+			firstData = getJsonData("media/status");
+		sleepDurationSec += 15;
+			if(sleepDurationSec > 300)
+				sleepDurationSec = 300;
+		});
+	} while(!firstData)
+	
 	/*
 	get Json data 
 
