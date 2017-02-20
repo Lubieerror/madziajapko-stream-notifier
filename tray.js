@@ -48,11 +48,11 @@ exports.create = win => {
 	tray.on('click', toggleWin);
 };
 
-exports.setBadge = shouldDisplayUnread => {
-	if (process.platform === 'darwin' || !tray) {
-		return;
-	}
+// exports.setBadge = shouldDisplayUnread => {
+// 	if (process.platform === 'darwin' || !tray) {
+// 		return;
+// 	}
 
-	const icon = shouldDisplayUnread ? 'IconTrayUnread.png' : 'IconTray.png';
-	tray.setImage('rsc/icon3.png');
-};
+// 	const icon = shouldDisplayUnread ? 'IconTrayUnread.png' : 'IconTray.png';
+// 	tray.setImage('rsc/icon3.png');
+// };

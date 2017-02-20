@@ -32,6 +32,8 @@ function applyChanges() {
 	$("#gra").html(game);
 }
 
+
+//main function!!!
 function checkStatus() {
 	/*
 	get Json data 
