@@ -5,10 +5,12 @@ var sname = '/madziajapko';
 var status = 'N/A';
 var title = 'N/A';
 var game = 'N/A'; //wargame *joke*
-
+ 
 function sleep (ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+
 // Usage!
 // sleep(500).then(() => {
 //     // Do something after the sleep!
@@ -25,14 +27,13 @@ function getJsonData(mid) {
 	var finalJson;
 
 	$.getJSON(link, function (tempJson) {
-		// console.log("inside: " + tempJson);
+		console.log(tempJson);
 		finalJson = tempJson;
 	});
 
-	// if(finalJson)
-	// 	return true;
-	// else
-	// 	return false;
+	console.log(finalJson);
+
+	return finalJson;
 }
 
 function getData() {
@@ -56,21 +57,66 @@ function applyChanges() {
 	$("#gra").html(game);
 }
 
+function testF() {
+	var printConsoleOutput = setInterval(() => {
+		var times = 0;
+		console.log("Tick!");
+		times++;
+		if(times > 10)
+			clearInterval(printConsoleOutput);
+	}, 1000 * 5);
+}
+
 
 //main function!!!
 function checkStatus() {
-	var sleepDurationSec = 1;
+	console.log("START!");
+	var sleepDurationSec = 10;
 	var firstData;
+	var illNameItLeater;
+
+	sleepDurationSec = 5; //================================== Przyśpieszone dla szybszego debugowania! Naprawić w wersji finalnej!
+
+	function firstTry() {
+		firstData = getJsonData("media/status");
+		// sleepDurationSec += 15; //========================= Wyłączyłem dla szybszego debugowania! Naprawić w wersji finalnej!
+
+		if(sleepDurationSec > 300)
+			sleepDurationSec = 300;
+
+		console.log(firstData);
+
+		if(firstData) {
+			clearTimeout(illNameItLeater);
+			console.log("finish it!; true");
+		}
+		else {
+			clearTimeout(illNameItLeater);
+			illNameItLeater = setTimeout(firstTry, 1000 * sleepDurationSec);
+		}
+	}
+
+	illNameItLeater = setTimeout(firstTry, 1000 * sleepDurationSec);
+	console.log("outside");
+
+	//===============================================================
+	//Old code for port it;;;
+
+	// var sleepDurationSec = 1;
+	// var firstData;
 	
-	do {
-		sleep(1000 * sleepDurationSec).then(() => {
-			firstData = getJsonData("media/status");
-		sleepDurationSec += 15;
-			if(sleepDurationSec > 300)
-				sleepDurationSec = 300;
-		});
-	} while(!firstData)
-	
+	// do {
+	// 	sleep(1000 * sleepDurationSec).then(() => {
+	// 		firstData = getJsonData("media/status");
+	// 		sleepDurationSec += 15;
+	// 		if(sleepDurationSec > 300)
+	// 			sleepDurationSec = 300;
+	// 	});
+	// } while(!firstData)
+
+
+	//==============================================================
+	//Plan
 	/*
 	get Json data 
 
