@@ -7,6 +7,9 @@ var liveDescriptionJson;
 
 //checkIsRunning/Done variables (mostly bools)
 
+var stage = 0;
+var isWorking = false;
+
 
 //HOMEWORK:
 
@@ -16,21 +19,30 @@ var liveDescriptionJson;
 
 // https://api.hitbox.tv/media/status/madziajapko
 
+// https://api.hitbox.tv/media/live/madziajapko
+
+// https://www.w3schools.com/js/js_errors.asp
+
 
 //TO DO:
 /*
 	- Event based system!
+	- try {
+		
+	} catch (error) {
+		
+	}
 
 	- Kontrola czasu w jakim się te skrypty będą wykonywać!
 	- Sprawdzanie poprawności danych
-	- Co zrobić jak internetu zabraknie D:
+	- Co zrobić jak internetu zabraknie D: //trycatch 
 	- Sprasować dane
 	- Resztę działań
 	- Zastosowanie tego wszystkiego!
  */
 
-function sleep (ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+function sleep(ms) {
+	return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 /* Usage!
@@ -42,7 +54,7 @@ function sleep (ms) {
 ///Functions:
 
 
-function updateStatus() {
+function updateSite() {
 	$('#status').html(status);
 	if(status === 'Online') {
 		$('#status').css('color', 'green');
@@ -60,20 +72,34 @@ function updateStatus() {
 	$('#gra').html(game);
 }
 
+function updateData() {
+	//
+}
+
 function getLiveStatus() {
+	isWorking = true;
 	var link = 'https://api.hitbox.tv/media/status/madziajapko';
 
-	$.getJSON(link, function(tmpJson) {
-		var tmpInt = setInterval(() => {
-			liveStatusJson = tmpJson;
-			if(liveStatusJson)
-				clearInterval(tmpInt);
-		}, 1000 * 5);
-	});
+	try {
+		$.getJSON(link, function(tmpJson) {
+			var tmpInt = setInterval(() => {
+				liveStatusJson = tmpJson;
+
+				if(liveStatusJson){
+					clearInterval(tmpInt);
+					stage = 1;
+					isWorking = false;
+				}
+			}, 1000 * 5);
+		});
+	} catch (error) {
+		// other stuff must be here than after clearInterval (cause it may cause errors)
+		clearInterval(tmpInt); //====================================== <= finished working here
+	}
 }
 
 function getLiveDescription() {
-	var link = 'TODO';
+	var link = 'https://api.hitbox.tv/media/live/madziajapko';
 
 	$.getJSON(link, function(tmpJson) {
 	});
@@ -82,5 +108,19 @@ function getLiveDescription() {
 //Run that:
 
 function checkStatus() {
+	if(isWorking)
+		return;
+
+	switch (stage) {
+		case 0:
+			
+		break;
+		case 1:
+		break;
+		case 3:
+		break;
+		case 4:
+		break;
+	}
 	//
 }
