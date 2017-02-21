@@ -37,11 +37,11 @@ function sleep (ms) {
  */
 
 
-function getJsonData(mid) {
+function getJsonDataOld(mid) {
 	var link = domena + mid + sname;
 	var finalJson;
 
-	$.getJSON(link, function (tempJson) {
+	$.getJSON(link, function(tempJson) {
 		console.log(tempJson);
 		finalJson = tempJson; // ====================== Problem! Wykona się, zanim getJSON zadziała :( 
 	});
@@ -49,6 +49,23 @@ function getJsonData(mid) {
 	console.log(finalJson); // ========= Z tego powodu będzie pusty x_x
 
 	return finalJson; // ======= tutaj też null D:
+}
+
+function getJsonData(mid) {
+	var link = domena + mid + sname;
+	var finalJson;
+
+	$.getJSON(link, function (tempJson) {
+		console.log(tempJson);
+		var testing = setInterval(() => {
+			finalJson = tempJson; // ====================== Problem! Wykona się, zanim getJSON zadziała :( 
+				if(finalJson) {
+					clearInterval(testing);
+					console.log(finalJson); // ========= Z tego powodu będzie pusty x_x
+					return finalJson; // ======= tutaj też null D:
+				}
+		}, 1000 * 3);
+	});
 }
 
 function applyChanges() {
@@ -79,6 +96,37 @@ function testF() {
 		if(times > 10)
 			clearInterval(printConsoleOutput);
 	}, 1000 * 5);
+}
+
+function checkStatusIdeal() {
+	var sleepDurationSec = 10;
+	var firstData;
+	var illNameItLeater;
+
+	sleepDurationSec = 5; //================================== Przyśpieszone dla szybszego debugowania! Naprawić w wersji finalnej!
+
+	function firstTry() {
+		firstData = getJsonData("media/status");
+		console.log("First data: ");
+		console.log(firstData);
+		// sleepDurationSec += 15; //========================= Wyłączyłem dla szybszego debugowania! Naprawić w wersji finalnej!
+
+		if(sleepDurationSec > 300)
+			sleepDurationSec = 300;
+
+		console.log(firstData);
+
+		if(firstData) {
+			clearTimeout(illNameItLeater);
+			console.log("finish it!; true");
+		}
+		else {
+			clearTimeout(illNameItLeater);
+			illNameItLeater = setTimeout(firstTry, 1000 * sleepDurationSec);
+		}
+	}
+
+	illNameItLeater = setTimeout(firstTry, 1000 * sleepDurationSec);
 }
 
 
