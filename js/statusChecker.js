@@ -10,17 +10,32 @@ function sleep (ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-
 // Usage!
 // sleep(500).then(() => {
 //     // Do something after the sleep!
 // });
 
-//UPDATE! IT'S BROKEN!
-// function sleep(ms) {
-// 	var currentTime = new Date().getTime();
-// 	while (currentTime + ms >= new Date().getTime()) {}
-// }
+
+
+//HOMEWORK:
+
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
+
+// https://www.w3schools.com/js/js_timing.asp
+
+// https://api.hitbox.tv/media/status/madziajapko
+
+//TO DO:
+
+/*
+	- Kontrola czasu w jakim się te skrypty będą wykonywać!
+	- Sprawdzanie poprawności danych
+	- Co zrobić jak internetu zabraknie D:
+	- Sprasować dane
+	- Resztę działań
+	- Zastosowanie tego wszystkiego!
+ */
+
 
 function getJsonData(mid) {
 	var link = domena + mid + sname;
@@ -28,15 +43,12 @@ function getJsonData(mid) {
 
 	$.getJSON(link, function (tempJson) {
 		console.log(tempJson);
-		finalJson = tempJson;
+		finalJson = tempJson; // ====================== Problem! Wykona się, zanim getJSON zadziała :( 
 	});
 
-	console.log(finalJson);
+	console.log(finalJson); // ========= Z tego powodu będzie pusty x_x
 
-	return finalJson;
-}
-
-function getData() {
+	return finalJson; // ======= tutaj też null D:
 }
 
 function applyChanges() {
@@ -57,6 +69,8 @@ function applyChanges() {
 	$("#gra").html(game);
 }
 
+
+// ============================================== Funkcja dla testów!
 function testF() {
 	var printConsoleOutput = setInterval(() => {
 		var times = 0;
@@ -70,7 +84,6 @@ function testF() {
 
 //main function!!!
 function checkStatus() {
-	console.log("START!");
 	var sleepDurationSec = 10;
 	var firstData;
 	var illNameItLeater;
@@ -97,23 +110,6 @@ function checkStatus() {
 	}
 
 	illNameItLeater = setTimeout(firstTry, 1000 * sleepDurationSec);
-	console.log("outside");
-
-	//===============================================================
-	//Old code for port it;;;
-
-	// var sleepDurationSec = 1;
-	// var firstData;
-	
-	// do {
-	// 	sleep(1000 * sleepDurationSec).then(() => {
-	// 		firstData = getJsonData("media/status");
-	// 		sleepDurationSec += 15;
-	// 		if(sleepDurationSec > 300)
-	// 			sleepDurationSec = 300;
-	// 	});
-	// } while(!firstData)
-
 
 	//==============================================================
 	//Plan
