@@ -5,7 +5,7 @@ var game = 'N/A'; //wargame *joke*
 var liveStatusJson;
 var liveDescriptionJson;
 
-//checkIsRunning/Done
+//checkIsRunning/Done variables (mostly bools)
 
 
 //HOMEWORK:
@@ -43,39 +43,41 @@ function sleep (ms) {
 
 
 function updateStatus() {
-	$("#status").html(status);
+	$('#status').html(status);
 	if(status === 'Online') {
-		$("#status").css("color", "green");
-		$("#statusBg").css("background-color", "darkgreen");
+		$('#status').css('color', 'green');
+		$('#statusBg').css('background-color', 'darkgreen');
 	}
 	else if(status === 'Offline') {
-		$("#status").css("color", "red");
-		$("#statusBg").css("background-color", "red");
+		$('#status').css('color', 'red');
+		$('#statusBg').css('background-color', 'red');
 	}
 	else {
-		$("#status").css("color", "gray");
-		$("#statusBg").css("background-color", "darkgray");
+		$('#status').css('color', 'gray');
+		$('#statusBg').css('background-color', 'darkgray');
 	}
-	$("#tytul").html(title);
-	$("#gra").html(game);
+	$('#tytul').html(title);
+	$('#gra').html(game);
 }
 
 function getLiveStatus() {
-	var link = "https://api.hitbox.tv/media/status/madziajapko";
+	var link = 'https://api.hitbox.tv/media/status/madziajapko';
 
-	$getJSON(link, function(liveStatusJson) {
+	$.getJSON(link, function(tmpJson) {
+		var tmpInt = setInterval(() => {
+			liveStatusJson = tmpJson;
+			if(liveStatusJson)
+				clearInterval(tmpInt);
+		}, 1000 * 5);
 	});
 }
 
 function getLiveDescription() {
-	var link = "TODO";
+	var link = 'TODO';
 
-	$getJSON(link, function(liveDescriptionJson) {
+	$.getJSON(link, function(tmpJson) {
 	});
 }
-
-
-
 
 //Run that:
 

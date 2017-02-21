@@ -6,7 +6,7 @@ function doMagic() {
 }
 window.onload = function main() {
 	doMagic();
-}
+};
 
 $(document).on('page-onload', console.log('Yey!'));
 

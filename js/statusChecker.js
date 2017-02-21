@@ -5,7 +5,7 @@ var sname = '/madziajapko';
 var status = 'N/A';
 var title = 'N/A';
 var game = 'N/A'; //wargame *joke*
- 
+
 function sleep (ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
