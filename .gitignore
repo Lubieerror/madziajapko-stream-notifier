@@ -1,3 +1,4 @@
 .vscode/
 helpings/
 node_modules/
+_build/
