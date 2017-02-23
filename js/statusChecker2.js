@@ -1,28 +1,36 @@
+// const notifier = require('node-notifier');
+const path = require('path');
+
+//streamer's data
 var person = 'madziajapko';
 
 var status = 'N/A';
+var lastStatus = status;
 var title = 'N/A';
 var game = 'N/A'; //wargame *joke*
 
-var liveStatusJson;
-var liveDescriptionJson;
-
 //checkIsRunning/Done variables (mostly bools)
-
 var stage = 0;
 var isWorking = false;
 
-var safeLoop;
-
-var updateNumber = -10000000;
+var updateNumber = -100000000;
 var lastCheckUpdate = updateNumber;
 
+//other public values
+var InitInterval;
+var updateFreq = 5;
+var safeLoop;
+
+var liveStatusJson;
+var liveDescriptionJson;
 
 //HOMEWORK:
 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
 
-// https://www.w3schools.com/js/js_timing.asp
+// https://github.com/mikaelbr/node-notifier
+
+// https://github.com/hokein/electron-sample-apps/tree/master/notifications
 
 // https://api.hitbox.tv/media/status/madziajapko
 
@@ -33,19 +41,13 @@ var lastCheckUpdate = updateNumber;
 
 //TO DO:
 /*
-	- Event based system!
-	- try {
-		
-	} catch (error) {
-		
-	}
-
-	- Kontrola czasu w jakim się te skrypty będą wykonywać!
-	- Sprawdzanie poprawności danych
-	- Co zrobić jak internetu zabraknie D: //trycatch 
-	- Sprasować dane
-	- Resztę działań
-	- Zastosowanie tego wszystkiego!
+	- Kontrola czasu w jakim się te skrypty będą wykonywać! (???)
+	- Optymalizacja(?)
+	- Powiadomienia
+	- Ustawienia (low prio)
+	- stworzyć z tego "moduł node'owy"
+	- nowocześniejszy wygląd
+	- może wreszcie zrobić bez ramki? :v
  */
 
 function sleep(ms) {
@@ -60,11 +62,62 @@ function sleep(ms) {
 
 ///Functions:
 
+function testNotification() {
+	// notifier.notify({
+	// 	title: 'Madzia Japko jest Online :D',
+	// 	sound: true,
+	// 	wait: true,
+	// 	message: 'Tytuł: ' + title + '\n Aktualna gra to: ' + game
+	// });
+	
+	var options = [{
+		title: "Basic Notification",
+		body: "Short message part"
+	},
+	{
+		title: "Content-Image Notification",
+		body: "Short message plus a custom content image",
+		icon: path.join(__dirname, 'icon.png')
+	}];
+
+	function doNotify(evt) {
+		if (evt.srcElement.id == "basic") {
+			new Notification(options[0].title, options[0]);
+		}
+		else if (evt.srcElement.id == "image") {
+			new Notification(options[1].title, options[1]);
+		}
+	}
+
+	doNotify();
+
+	// document.addEventListener('DOMContentLoaded', function() {
+	// document.getElementById("basic").addEventListener("click", doNotify);
+	// document.getElementById("image").addEventListener("click", doNotify);
+	// });
+}
+
+function changeInitInterval(uf) {
+	updateFreq = uf;
+	try {
+		clearInterval(InitInterval);
+	} catch (err) {
+		console.log("Error! InitInterval prawdopodobnie nie istnieje! Tworzymy nowy!");
+	}
+	InitInterval = setInterval(checkStatus, updateFreq * 1000);
+}
+
 function universalUpdate() {
 	$('#status').html(status);
 	if(status === 'Online') {
 		$('#status').css('color', 'green');
 		$('#statusBg').css('background-color', 'darkgreen');
+		if(lastStatus !== status) {
+			notifier.notify({
+				'title': 'Madzia Japko jest Online :D',
+				'message': 'Tytuł: ' + title + '\n Aktualna gra to: ' + game
+			});
+		}
 	}
 	else if(status === 'Offline') {
 		$('#status').css('color', 'red');
@@ -76,10 +129,16 @@ function universalUpdate() {
 	}
 	$('#tytul').html(title);
 	$('#gra').html(game);
+
+	lastStatus = status;
 }
 
 function updateSite() {
 	isWorking = true;
+	if(updateNumber === -100000000) {
+		changeInitInterval(30);
+	}
+		
 	updateNumber++;
 
 	universalUpdate();
@@ -238,9 +297,9 @@ $(document).ready(function(){
 	if(dontRun)
 		return;
 
-	sleep(6300 * 1).then(() => {
+	sleep(4700).then(() => {
 		console.log("Starting init script!");
 	});
-	var InitInterval = setInterval(checkStatus, 15000);
-	var InitInterval = setInterval(checkStatus, 300000); // 5 minut
+	InitInterval = setInterval(checkStatus, updateFreq * 1000);
+	var refreshInterval = setInterval(refreshData, 300000); // 5 minut
 });

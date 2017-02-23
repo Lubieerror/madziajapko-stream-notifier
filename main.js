@@ -8,7 +8,7 @@ let appIcon = 'rsc/icon3.png';
 let mainWindow;
 
 function createWindow() {
-  mainWindow = new BrowserWindow({width: 350, height: 200, resizable: false, autoHideMenuBar: true, icon: appIcon});
+  mainWindow = new BrowserWindow({width: 370, height: 210, resizable: false, autoHideMenuBar: true, icon: appIcon});
   // mainWindow = new BrowserWindow({width: 400, height: 250, resizable: false, frame: false, icon: 'rsc/icon3.png'});
 
   const Positioner = require('electron-positioner');

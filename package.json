@@ -9,9 +9,11 @@
   "author": "lubieerror",
   "license": "GPL-3.0",
   "devDependencies": {
-    "electron": "^1.4.15"
+    "electron": "^1.4.15",
+    "node-notifier": "^5.0.2"
   },
   "dependencies": {
-    "electron-positioner": "^3.0.0"
+    "electron-positioner": "^3.0.0",
+    "node-notifier": "^5.0.2"
   }
 }
