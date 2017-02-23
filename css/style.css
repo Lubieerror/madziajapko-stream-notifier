@@ -8,6 +8,7 @@ body {
 
 #left {
 	width: 60%;
+	height: 201px;
 	float: left;
 }
 
@@ -49,6 +50,11 @@ body {
 	height: auto;
 	margin: auto;
 	cursor: pointer;
+}
+
+#exit {
+	float: left;
+	margin-left: 19px;
 }
 
 #everything {

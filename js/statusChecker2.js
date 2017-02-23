@@ -1,4 +1,4 @@
-// const notifier = require('node-notifier');
+const notifier = require('node-notifier');
 const path = require('path');
 
 //streamer's data
@@ -26,8 +26,6 @@ var liveDescriptionJson;
 
 //HOMEWORK:
 
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
-
 // https://github.com/mikaelbr/node-notifier
 
 // https://github.com/hokein/electron-sample-apps/tree/master/notifications
@@ -35,8 +33,6 @@ var liveDescriptionJson;
 // https://api.hitbox.tv/media/status/madziajapko
 
 // https://api.hitbox.tv/media/live/madziajapko
-
-// https://www.w3schools.com/js/js_errors.asp
 
 
 //TO DO:
@@ -48,6 +44,7 @@ var liveDescriptionJson;
 	- stworzyć z tego "moduł node'owy"
 	- nowocześniejszy wygląd
 	- może wreszcie zrobić bez ramki? :v
+	- więcej w README.md
  */
 
 function sleep(ms) {
@@ -63,12 +60,19 @@ function sleep(ms) {
 ///Functions:
 
 function testNotification() {
-	// notifier.notify({
-	// 	title: 'Madzia Japko jest Online :D',
-	// 	sound: true,
-	// 	wait: true,
-	// 	message: 'Tytuł: ' + title + '\n Aktualna gra to: ' + game
-	// });
+	/*
+
+		Problem! For now it's working only on Linux ; ___;
+
+	*/
+
+	notifier.notify({
+		title: 'Madzia Japko jest Online :D',
+		sound: true,
+		wait: true,
+		message: 'Tytuł: ' + title + '\n Aktualna gra to: ' + game,
+		icon: path.join(__dirname, 'rsc/madzia.jpg')
+	});
 	
 	var options = [{
 		title: "Basic Notification",
@@ -77,24 +81,23 @@ function testNotification() {
 	{
 		title: "Content-Image Notification",
 		body: "Short message plus a custom content image",
-		icon: path.join(__dirname, 'icon.png')
+		icon: path.join(__dirname, 'rsc/madzia.jpg')
 	}];
 
-	function doNotify(evt) {
-		if (evt.srcElement.id == "basic") {
-			new Notification(options[0].title, options[0]);
-		}
-		else if (evt.srcElement.id == "image") {
-			new Notification(options[1].title, options[1]);
-		}
+	// function doNotify(evt) {
+	// 	if (evt.srcElement.id == "basic") {
+	// 		new Notification(options[0].title, options[0]);
+	// 	}
+	// 	else if (evt.srcElement.id == "image") {
+	// 		new Notification(options[1].title, options[1]);
+	// 	}
+	// }
+
+	function doNotify() {
+		new Notification(options[1].title, options[1]);
 	}
 
 	doNotify();
-
-	// document.addEventListener('DOMContentLoaded', function() {
-	// document.getElementById("basic").addEventListener("click", doNotify);
-	// document.getElementById("image").addEventListener("click", doNotify);
-	// });
 }
 
 function changeInitInterval(uf) {
@@ -114,8 +117,11 @@ function universalUpdate() {
 		$('#statusBg').css('background-color', 'darkgreen');
 		if(lastStatus !== status) {
 			notifier.notify({
-				'title': 'Madzia Japko jest Online :D',
-				'message': 'Tytuł: ' + title + '\n Aktualna gra to: ' + game
+				title: 'Madzia Japko jest Online :D',
+				sound: true,
+				wait: true,
+				message: 'Tytuł: ' + title + '\n Aktualna gra to: ' + game,
+				icon: path.join(__dirname, 'rsc/madzia.jpg')
 			});
 		}
 	}
