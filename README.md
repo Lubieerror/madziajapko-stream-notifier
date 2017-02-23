@@ -1,7 +1,7 @@
 # madziajapko-stream-notifier
 Stan na dzień 23.02.2017r., ok godziny 10:00
 > 
-> ## <p style="color: red"> Wersja beta gotowa do testowania! </p>
+> ## Wersja beta gotowa do testowania! </p>
 > 
 
 ## <b> Co działa? </b>
@@ -20,8 +20,8 @@ Stan na dzień 23.02.2017r., ok godziny 10:00
 <br>
 <hr>
 
-## <b style="color: red;"> Błędy: </b>
-* <p style="color: red;"> w wersji dla Windowsa nie działają powiadomienia
+## <b> Błędy: </b>
+* w wersji dla Windowsa nie działają powiadomienia
 
 <br>
 <hr>
@@ -86,7 +86,9 @@ Stan na dzień 23.02.2017r., ok godziny 10:00
  * wejść do folderu w którym chcemy stworzyć plik projektu
  * Przytrzymując shift kliknąć prawym przyciskiem myszy na folder i wybrać cmd
  * Wpisać (adres można także wziąć z zielonego przycisku "Clone or download" po prawej stronie, nad plikami na githubie)
- > git clone https://github.com/Lubieerror/madziajapko-stream-notifier.git 
+```sh
+git clone https://github.com/Lubieerror/madziajapko-stream-notifier.git 
+```
 
  <hr>
 
@@ -102,11 +104,17 @@ Stan na dzień 23.02.2017r., ok godziny 10:00
  * Jeśli czujesz się na siłach możesz edytować pewne elementy programu (wdzięczny był bym też za wysłanie poprawek)
  * Wejść za pomocą linii poleceń do folderu z projektem
  * Wpisać:
- > npm install
+```sh
+npm install
+```
 
- >npm start
+```sh
+ npm start
+```
 
-## <p style="color: green"> Gotowe!
+ <br>
+
+# Gotowe!
 Możesz teraz cieszyć się funkcjonalnym powiadamiaczem! 
 
 <hr>

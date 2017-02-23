@@ -1,15 +1,24 @@
 {
-  "name": "madzia-japko-stream-notifier",
+  "name": "madzia-japko-notifier",
   "version": "1.1.0",
   "description": "Powiadamia o liveach",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "npm run build:macos && npm run build:lin64 && npm run build:win32-cross",
+    "build:cross-win": "npm run build:macos && npm run build:lin64-cross && npm run build:win32",
+    "build:cross-lin": "npm run build:macos && npm run build:lin64 && npm run build:win32-cross",
+    "build:lin64": "electron-packager . --overwrite --out=_builds --platform=linux --arch=x64 --app-bundle-id=su.lubieerror.madzia-japko-notifier --app-version=$npm_package_version && cp -r rsc _builds/madzia-japko-notifier-linux-x64 && cd _builds/madzia-japko-notifier-linux-x64 && zip -ryq9 ../madzia-japko-notifier-linux-${npm_package_version}.zip *",
+    "build:lin64-cross": "electron-packager . --overwrite --out=_builds --platform=linux --arch=x64 --app-bundle-id=su.lubieerror.madzia-japko-notifier --app-version=$npm_package_version && xcopy /e rsc _builds/madzia-japko-notifier-linux-x64 && cd _builds/madzia-japko-notifier-linux-x64 && zip -ryq9 ../madzia-japko-notifier-linux-${npm_package_version}.zip *",
+    "build:win32": "electron-packager . --overwrite --out=_builds --platform=win32 --arch=ia32 --icon=rsc/Icon.ico --version-string.ProductName=$npm_package_productName --app-version=$npm_package_version && xcopy /e rsc _builds/madzia-japko-notifier-win32-ia32 && cd _builds/madzia-japko-notifier-win32-ia32 && zip -ryq9 ../madzia-japko-notifier-windows-${npm_package_version}.zip *",
+    "build:win32-cross": "electron-packager . --overwrite --out=_builds --platform=win32 --arch=ia32 --icon=rsc/Icon.ico --version-string.ProductName=$npm_package_productName --app-version=$npm_package_version && cp -r rsc _builds/madzia-japko-notifier-win32-ia32 && cd _builds/madzia-japko-notifier-win32-ia32 && zip -ryq9 ../madzia-japko-notifier-windows-${npm_package_version}.zip *",
+    "build:macos": "electron-packager . --overwrite --out=_builds --platform=darwin --arch=x64 --icon=rsc/Icon.icns --app-bundle-id=su.lubieerror.madzia-japko-notifier --app-version=$npm_package_version"
   },
   "author": "lubieerror",
   "license": "GPL-3.0",
   "devDependencies": {
     "electron": "^1.4.15",
+    "electron-packager": "^8.5.2",
     "node-notifier": "^5.0.2"
   },
   "dependencies": {
